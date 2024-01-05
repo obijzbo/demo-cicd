@@ -1,0 +1,18 @@
+version: "3.3"
+networks:
+    server-bridge:
+        driver: bridge
+
+services:
+    drchashi-app:
+        image: "demo-project-fastapi"
+        container_name: demo-project-fastapi
+        restart: always
+        ports:
+            - "9000:8000"
+        command: >-
+            /bin/bash -c "uvicorn app:app --host 0.0.0.0 --port 8000 --reload"
+        volumes:
+            - $PWD:/fastAPI
+        networks:
+            - server-bridge
